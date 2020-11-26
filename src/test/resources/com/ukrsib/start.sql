@@ -1,0 +1,18 @@
+CREATE TABLE CLIENT (
+    "ID" uuid NOT NULL,
+    "FIRST_NAME" CHARACTER VARYING(255),
+    "INN" INTEGER,
+    "LAST_NAME" CHARACTER VARYING(255),
+    "MIDDLE_NAME" CHARACTER VARYING(255),
+    PRIMARY KEY (ID)
+);
+
+CREATE TABLE TRANSACTION (
+    "ID" uuid NOT NULL,
+    "AMOUNT" double precision,
+    "CARD" character VARYING(255),
+    "CURRENCY" character VARYING(255),
+    "PLACE" character VARYING(255),
+    client uuid,
+    PRIMARY KEY (ID)
+);

@@ -1,0 +1,64 @@
+server:
+  port: 8080
+logging:
+  level:
+    springfox: info
+    org:
+      springframework: INFO
+      hibernate: INFO
+    com:
+      ukrsib: DEBUG
+---
+spring:
+  profiles:
+    active: oraclexe
+  application:
+    name: AccountsProcessor
+management:
+  server:
+    port: 8090
+  endpoint:
+    health:
+      show-details: ALWAYS
+---
+spring:
+  profiles: psql
+  datasource:
+    url: jdbc:postgresql://127.0.0.1:5432/postgres?currentSchema=public
+    username: pfm_dba
+    password: 123456
+    driver-class-name: org.postgresql.Driver
+    initialization-mode: ALWAYS
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQL9Dialect
+        hbm2ddl:
+          auto: none
+        show_sql: true
+    database-platform: org.hibernate.dialect.PostgreSQL9Dialect
+    dialect: org.hibernate.dialect.PostgreSQL9Dialect
+    database: POSTGRESQL
+    show-sql: false
+    hibernate:
+      ddl-auto: 'none'
+---
+spring:
+  profiles: test
+  liquibase:
+    enabled: false
+  datasource:
+    url: jdbc:hsqldb:mem:pfm_db;memory_lobs=true
+    username: sa
+    password:
+  jpa:
+    dialect: org.hibernate.dialect.HSQLDialect
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+---
+accounts:
+  folder: /var
+console:
+  fixedDelay: 5000
+  initialDelay: 1000
