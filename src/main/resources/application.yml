@@ -45,8 +45,6 @@ spring:
 ---
 spring:
   profiles: test
-  liquibase:
-    enabled: false
   datasource:
     url: jdbc:hsqldb:mem:pfm_db;memory_lobs=true
     username: sa
